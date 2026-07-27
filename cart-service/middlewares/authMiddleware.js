@@ -1,0 +1,15 @@
+const jwt = require('jsonwebtoken');
+const config = require('../../credentials/config');
+const protect = (req, res, next) => {
+  let token;
+  const header = req.headers.authorization;
+  if (header && header.startsWith('Bearer')) token = header.split(' ')[1];
+  if (!token) return res.status(401).json({ success: false, message: 'Not authorized, no token' });
+  try {
+    req.user = jwt.verify(token, config.JWT_SECRET);
+    next();
+  } catch (err) {
+    next(err);
+  }
+};
+module.exports = { protect };
