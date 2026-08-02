@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: product-service
+  namespace: retailstore
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: product-service
+
+  template:
+    metadata:
+      labels:
+        app: product-service
+
+    spec:
+      containers:
+      - name: product-service
+
+        image: akashjagdale177/product-service:v4
+
+        imagePullPolicy: Always
+
+        ports:
+        - containerPort: 5002
+
+        envFrom:
+        - configMapRef:
+            name: retail-config
+
+---
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: product-service
+  namespace: retailstore
+
+spec:
+
+  selector:
+    app: product-service
+
+  ports:
+
+  - port: 5002
+    targetPort: 5002
+
+  type: ClusterIP

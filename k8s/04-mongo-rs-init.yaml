@@ -1,0 +1,33 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: mongo-rs-init
+  namespace: retailstore
+
+spec:
+  template:
+    spec:
+      restartPolicy: Never
+
+      containers:
+      - name: mongo-init
+        image: mongo:7
+
+        command:
+        - sh
+        - -c
+        - |
+          sleep 20
+
+          mongosh --host mongodb-0.mongo-svc:27017 <<EOF
+
+          rs.initiate({
+            _id:"rs0",
+            members:[
+              {_id:0,host:"mongodb-0.mongo-svc:27017"},
+              {_id:1,host:"mongodb-1.mongo-svc:27017"},
+              {_id:2,host:"mongodb-2.mongo-svc:27017"}
+            ]
+          })
+
+          EOF

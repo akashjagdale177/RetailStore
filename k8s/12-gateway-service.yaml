@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gateway-service
+  namespace: retailstore
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gateway-service
+  template:
+    metadata:
+      labels:
+        app: gateway-service
+    spec:
+      containers:
+      - name: gateway-service
+        image: akashjagdale177/gateway-service:v4
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 5000
+        envFrom:
+        - configMapRef:
+            name: retail-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gateway-service
+  namespace: retailstore
+spec:
+  selector:
+    app: gateway-service
+  ports:
+  - port: 5000
+    targetPort: 5000
+  type: ClusterIP

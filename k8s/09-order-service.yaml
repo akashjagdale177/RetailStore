@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: order-service
+  namespace: retailstore
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: order-service
+  template:
+    metadata:
+      labels:
+        app: order-service
+    spec:
+      containers:
+      - name: order-service
+        image: akashjagdale177/order-service:v4
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 5004
+        envFrom:
+        - configMapRef:
+            name: retail-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: order-service
+  namespace: retailstore
+spec:
+  selector:
+    app: order-service
+  ports:
+  - port: 5004
+    targetPort: 5004
+  type: ClusterIP
