@@ -9,9 +9,11 @@ kubectl apply -f 04-mongo-rs-init.yaml
 sleep 20
 
 kubectl apply -f 05-configmap.yaml
-
-kubectl apply -f 06-auth-service.yaml
+sleep 20
 kubectl apply -f 07-product-service.yaml
+sleep 20
+kubectl apply -f 06-auth-service.yaml
+sleep 20
 kubectl apply -f 08-cart-service.yaml
 kubectl apply -f 09-order-service.yaml
 kubectl apply -f 10-user-service.yaml
