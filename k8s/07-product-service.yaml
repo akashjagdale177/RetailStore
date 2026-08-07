@@ -21,7 +21,7 @@ spec:
       containers:
       - name: product-service
 
-        image: akashjagdale177/product-service:v4
+        image: akashjagdale177/product-service
 
         imagePullPolicy: Always
 

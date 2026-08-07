@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: cart-service
-        image: akashjagdale177/cart-service:v4
+        image: akashjagdale177/cart-service
         imagePullPolicy: Always
         ports:
         - containerPort: 5003

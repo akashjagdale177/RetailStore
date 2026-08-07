@@ -20,7 +20,7 @@ spec:
       containers:
       - name: auth-service
 
-        image: akashjagdale177/auth-service:v4
+        image: akashjagdale177/auth-service
 
         imagePullPolicy: Always
 
