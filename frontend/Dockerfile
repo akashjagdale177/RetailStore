@@ -1,19 +1,15 @@
-FROM node:20-alpine AS build
+FROM node:18-alpine as builder
+WORKDIR /app
 
-WORKDIR /project/frontend
-
+# Copy root credentials and frontend files
+COPY credentials/ ../credentials/
 COPY frontend/package*.json ./
-
 RUN npm install
 
-COPY frontend/ ./
-
+COPY frontend/ .
 RUN npm run build
 
 FROM nginx:alpine
-
-COPY --from=build /project/frontend/dist /usr/share/nginx/html
-
+COPY --from=builder /app/dist /usr/share/nginx/html
 EXPOSE 80
-
-CMD ["nginx","-g","daemon off;"]
+CMD ["nginx", "-g", "daemon off;"]

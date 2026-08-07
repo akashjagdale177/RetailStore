@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: gateway-service
-        image: akashjagdale177/gateway-service
+        image: akashjagdale177/gateway-service:v1
         imagePullPolicy: Always
         ports:
         - containerPort: 5000

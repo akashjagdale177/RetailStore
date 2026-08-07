@@ -3,16 +3,16 @@ kind: ConfigMap
 metadata:
   name: retail-config
   namespace: retailstore
-
 data:
   MONGODB_URL: "mongodb://mongodb-0.mongo-svc:27017,mongodb-1.mongo-svc:27017,mongodb-2.mongo-svc:27017/retail-store?replicaSet=rs0"
-
   JWT_SECRET: "change-me-in-production"
-
   JWT_EXPIRES_IN: "7d"
-
   ADMIN_USERNAME: "akash"
-
   ADMIN_PASSWORD: "123"
-
   GATEWAY_URL: "http://gateway-service:5000"
+  AUTH_SERVICE_URL: "http://auth-service:5001"
+  PRODUCT_SERVICE_URL: "http://product-service:5002"
+  CART_SERVICE_URL: "http://cart-service:5003"
+  ORDER_SERVICE_URL: "http://order-service:5004"
+  USER_SERVICE_URL: "http://user-service:5005"
+  NOTIFICATION_SERVICE_URL: "http://notification-service:5006"

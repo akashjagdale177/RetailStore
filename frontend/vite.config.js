@@ -16,10 +16,10 @@ function loadGatewayUrl() {
   try {
     const raw = fs.readFileSync(path.resolve(__dirname, '../credentials/urls.json'), 'utf-8');
     const parsed = JSON.parse(raw);
-    return parsed.GATEWAY_URL || 'http://localhost:5000';
+    return parsed.GATEWAY_URL !== undefined ? parsed.GATEWAY_URL : 'http://localhost:5000';
   } catch (err) {
     console.warn('[frontend] Could not read ../credentials/urls.json, falling back to .env / default.');
-    return process.env.VITE_GATEWAY_URL || 'http://localhost:5000';
+    return process.env.VITE_GATEWAY_URL !== undefined ? process.env.VITE_GATEWAY_URL : 'http://localhost:5000';
   }
 }
 

@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: order-service
-        image: akashjagdale177/order-service
+        image: akashjagdale177/order-service:v1
         imagePullPolicy: Always
         ports:
         - containerPort: 5004
